@@ -11,10 +11,8 @@ With this Lambda Function you will be able to add decoding features to your appl
 * **You will need to have an Amazon S3 Bucket created.**
 * **You will need to create a folder inside that bucket, where you will upload your images to decode.(Optional)**
 
-![CloudShell](src/img/step-0_1.png)
-
 #### Step 2, Generate code artifacts and dependencies
-To read QR/Barcodes, we are going to be using the Zbar, an open source software suite for reading bar codes. We are going to include Zbar and other necessary packages into Lambda Layers for our Lambda function to work.
+To read QR/Barcodes, we are going to be using the [Zbar library](https://github.com/mchehab/zbar), an open source software suite for reading bar codes. We are going to include Zbar and other necessary packages into Lambda Layers for our Lambda function to work.
 But don't worry, we have already automated this process for you, in a simple script you can run in your AWS Cloudshell! Here are the steps you have to follow:
 
 * Access AWS CloudShell, a browser-based shell inside the AWS console. You can click the terminal icon next to the search bar or looking for _Cloudshell_ in the service search bar.
@@ -40,7 +38,7 @@ But don't worry, we have already automated this process for you, in a simple scr
 * Select Python 3.7 as runtime
 * Select x86_64 as architecture
 * Create a new role with basic Lambda permissions
-* Replace the code with Python code inside code/lambda.py.
+* Replace the code with Python code inside `code/lambda.py`
 
 You have now created the Lambda function!
 
