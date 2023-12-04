@@ -1,0 +1,5 @@
+pandas
+pdf2image
+boto3
+mysql-connector-python
+SQLAlchemy

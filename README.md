@@ -19,7 +19,7 @@ But don't worry, we have already automated this process for you, in a simple scr
 
 ![CloudShell](src/img/step-0_1.png)
 * Once CloudShell has initiallized, clone this repo 
-   * `git clone https://github.com/aws-samples/Barcode-QR-Decoder-Lambda.git`
+   * `git clone https://github.com/Consoneo/Barcode-QR-Decoder-Lambda.git`
 
 
 * Run the `setup.sh` script in order to generate the needed lambda layers and code package. You must specify the bucket where you want to upload this artifacts replacing <BUCKET_NAME> with the S3 bucket name you created.
@@ -35,10 +35,15 @@ But don't worry, we have already automated this process for you, in a simple scr
 * Create a new Lambda Function.
 * Select Author from scratch.
 * Input a new name for your function
-* Select Python 3.7 as runtime
+* Select Python 3.10 as runtime
 * Select x86_64 as architecture
 * Create a new role with basic Lambda permissions
 * Replace the code with Python code inside `code/lambda.py`
+* Add envirroement variables :
+   - DB_USER
+   - DB_PASSWORD
+   - DB_HOST
+   - DB_DATABASE
 
 You have now created the Lambda function!
 
@@ -51,7 +56,7 @@ Follow these steps to create your layers:
   - (Optional) For Description, enter a description for your layer.
   - To upload a file from Amazon S3, choose Upload a file from Amazon S3. Then, for Amazon S3 link URL, enter the S3 URI of the artifact.
   - For Compatible architectures, choose x86_64.
-  - For Compatible runtimes, choose Python 3.7.
+  - For Compatible runtimes, choose Python 3.10.
   - Choose Create.
 
 Repeat these steps for both artifacts created in S3.
