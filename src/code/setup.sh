@@ -15,7 +15,7 @@ if [ -z "$BUCKET_NAME" ]
 fi
 
 #set variables. Replace <BUCKET_NAME> with the name of your S3 bucket
-LAYER_FOLDER_TREE=python/lib/python3.7/site-packages
+LAYER_FOLDER_TREE=python/lib/python3.9/site-packages
 
 #download and zip pillow layer
 mkdir -p $LAYER_FOLDER_TREE
@@ -32,11 +32,11 @@ sudo yum install -y autoconf autopoint gettext-devel automake pkgconfig libtool
 git clone https://github.com/mchehab/zbar.git
 cd zbar/
 autoreconf -vfi
-./configure && make && cd
+./configure --with-gtk=auto --with-python=auto && make && cd
 
 #copy library to layer folder and replace libzbar.so path inside zbar_library.py to correctly load the library. Lambda layers (.zips) will be uploaded to S3
 cp zbar/zbar/.libs/libzbar.so.0.3.0 $LAYER_FOLDER_TREE/pyzbar/libzbar.so
-sed -i "s/find_library('zbar')/('\/opt\/python\/lib\/python3.7\/site-packages\/pyzbar\/libzbar.so')/g" $LAYER_FOLDER_TREE/pyzbar/zbar_library.py
+sed -i "s/find_library('zbar')/('\/opt\/python\/lib\/python3.9\/site-packages\/pyzbar\/libzbar.so')/g" $LAYER_FOLDER_TREE/pyzbar/zbar_library.py
 zip -r pyzbar_layer.zip python && rm -rf python && rm -rf zbar
 
 #package lambda function code in a .zip
