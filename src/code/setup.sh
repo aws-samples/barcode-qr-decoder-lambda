@@ -17,7 +17,7 @@ fi
 #download python 3.9
 wget https://www.python.org/ftp/python/3.9.18/Python-3.9.18.tgz
 tar xvf Python-3.9.18.tgz && cd Python-3.9.18
-./configure --enable-optimizations && sudo make altinstall && cd 
+./configure --enable-optimizations && sudo make altinstall && cd ..
 
 #create and activate python venv
 python3.9 -m venv .venv && source .venv/bin/activate
@@ -31,7 +31,7 @@ pip install pillow -t $LAYER_FOLDER_TREE
 #zip -r pillow_layer.zip python && rm -r python
 
 #download pyzbar layer
-mkdir -p $LAYER_FOLDER_TREE
+#mkdir -p $LAYER_FOLDER_TREE
 pip install pyzbar -t $LAYER_FOLDER_TREE
 
 #get shared library (libzbar.so) needed for pyzbar to work properly within the Lambda function
@@ -40,7 +40,7 @@ sudo yum install -y autoconf autopoint gettext-devel automake pkgconfig libtool
 git clone https://github.com/mchehab/zbar.git
 cd zbar/
 autoreconf -vfi
-./configure --with-gtk=auto --with-python=auto && make && cd
+./configure --with-gtk=auto --with-python=auto && make && cd ..
 
 #copy library to layer folder and replace libzbar.so path inside zbar_library.py to correctly load the library. Lambda layers (.zips) will be uploaded to S3
 cp zbar/zbar/.libs/libzbar.so.0.3.0 $LAYER_FOLDER_TREE/pyzbar/libzbar.so
@@ -48,12 +48,12 @@ sed -i "s/find_library('zbar')/('\/opt\/python\/lib\/python3.9\/site-packages\/p
 zip -r barcode_layer.zip python && rm -rf python && rm -rf zbar
 
 #package lambda function code in a .zip
-zip -r lambda_function.zip Barcode-QR-Decoder-Lambda/src/code/lambda_function.zip
+zip -r lambda_function.zip barcode-qr-decoder-lambda/src/code/lambda_function.py
 #aws s3 sync . s3://$BUCKET_NAME/BarcodeQRDecoder/qr-reader/assets --exclude="*" --exclude=".c9*" --include="*layer.zip" --include="lambda_function.zip"
 #aws s3 sync . s3://$BUCKET_NAME/BarcodeQRDecoder/qr-reader/assets --include="*.zip"
 
-aws s3 cp barcode_layer.zip s3://$BUCKET_NAME/BarcodeQRDecoder/qr-reader/assets
-aws s3 cp lambda_function.zi s3://$BUCKET_NAME/BarcodeQRDecoder/qr-reader/assets
+aws s3 cp barcode_layer_py39.zip s3://$BUCKET_NAME/BarcodeQRDecoder/qr-reader/assets
+aws s3 cp lambda_function.zip s3://$BUCKET_NAME/BarcodeQRDecoder/qr-reader/assets
 
 
 #delete generated lambda layers after uploaded to S3 to clean curent directory
