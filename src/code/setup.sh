@@ -52,8 +52,8 @@ zip -r lambda_function.zip barcode-qr-decoder-lambda/src/code/lambda_function.py
 #aws s3 sync . s3://$BUCKET_NAME/BarcodeQRDecoder/qr-reader/assets --exclude="*" --exclude=".c9*" --include="*layer.zip" --include="lambda_function.zip"
 #aws s3 sync . s3://$BUCKET_NAME/BarcodeQRDecoder/qr-reader/assets --include="*.zip"
 
-aws s3 cp barcode_layer_py39.zip s3://$BUCKET_NAME/BarcodeQRDecoder/qr-reader/assets
-aws s3 cp lambda_function.zip s3://$BUCKET_NAME/BarcodeQRDecoder/qr-reader/assets
+aws s3 cp barcode_layer_py39.zip s3://$BUCKET_NAME/BarcodeQRDecoder/qr-reader/assets/
+aws s3 cp lambda_function.zip s3://$BUCKET_NAME/BarcodeQRDecoder/qr-reader/assets/
 
 
 #delete generated lambda layers after uploaded to S3 to clean curent directory
