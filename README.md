@@ -13,9 +13,9 @@ With this Lambda Function you will be able to add decoding features to your appl
 
 #### Step 2, Generate code artifacts and dependencies
 To read QR/Barcodes, we are going to be using the [Zbar library](https://github.com/mchehab/zbar), an open source software suite for reading bar codes. We are going to include Zbar and other necessary packages into Lambda Layers for our Lambda function to work.
-But don't worry, we have already automated this process for you, in a simple script you can run in your AWS Cloudshell! Here are the steps you have to follow:
+But don't worry, we have already automated this process for you, in a simple script you can run in your AWS Cloud9! Here are the steps you have to follow:
 
-* Access AWS CloudShell, a browser-based shell inside the AWS console. You can click the terminal icon next to the search bar or looking for _Cloudshell_ in the service search bar.
+* Access AWS Cloud9 looking for _Cloud9_ in the service search bar.
 
 ![CloudShell](src/img/step-0_1.png)
 * Once CloudShell has initiallized, clone this repo 
