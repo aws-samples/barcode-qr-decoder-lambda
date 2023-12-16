@@ -45,7 +45,7 @@ autoreconf -vfi
 #copy library to layer folder and replace libzbar.so path inside zbar_library.py to correctly load the library. Lambda layers (.zips) will be uploaded to S3
 cp zbar/zbar/.libs/libzbar.so.0.3.0 $LAYER_FOLDER_TREE/pyzbar/libzbar.so
 sed -i "s/find_library('zbar')/('\/opt\/python\/lib\/python3.9\/site-packages\/pyzbar\/libzbar.so')/g" $LAYER_FOLDER_TREE/pyzbar/zbar_library.py
-zip -r barcode_layer.zip python && rm -rf python && rm -rf zbar
+zip -r barcode_layer_py39.zip python && rm -rf python && rm -rf zbar
 
 #package lambda function code in a .zip
 zip -r lambda_function.zip barcode-qr-decoder-lambda/src/code/lambda_function.py
